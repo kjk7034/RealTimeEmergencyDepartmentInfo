@@ -1,0 +1,3 @@
+rootProject.name = 'RealTimeEmergencyDepartmentInfo'
+
+include ':app'
