@@ -27,7 +27,7 @@ export class App extends Component {
     render() {
         const _this = this;
         var navigatorProps = {
-            initialRoute: {name:"Home"},
+            initialRoute: {name:"LocationSet"},
             renderScene: (route, navigator) => {
 
                 const routeName = route.name;
@@ -39,6 +39,14 @@ export class App extends Component {
                 }
 
                 switch (routeName) {
+                    case 'LocationSet' :
+                        return (
+                            <View style={[CommonCSS.StatusBarBg1, {flex:1, paddingTop: $StatusBarHeight}]}>
+                                <StatusBar backgroundColor={GetColor("black")} barStyle="light-content" />
+                                <Home title="HOME" navigator={navigator} />
+                            </View>
+                        );
+                        break;
                     case 'Home' :
                         return (
                             <View style={[CommonCSS.StatusBarBg1, {flex:1, paddingTop: $StatusBarHeight}]}>
@@ -47,7 +55,6 @@ export class App extends Component {
                             </View>
                         );
                         break;
-
                     default :
                         return (
                             <View ><Text>페이지를 찾을 수 없습니다.</Text></View>
