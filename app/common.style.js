@@ -64,7 +64,7 @@ export const GetColor = function (type) {
 export const CommonCSS = StyleSheet.create({
     wrapper : {
         flex:1,
-        backgroundColor:GetColor("white")
+        backgroundColor:"#dddee3"
     },
     contCenter : {
         alignItems : "center",
@@ -75,6 +75,25 @@ export const CommonCSS = StyleSheet.create({
     },
     StatusBarBg1 : {
         backgroundColor:GetColor("black")
+    },
+    Header : {
+        height:rateNum(56),
+        backgroundColor: "#3b5999",
+        alignItems : 'center',
+        justifyContent : 'center',
+    },
+    h1 : {
+        color:"#fff",
+        fontSize: rateNum(20),
+    },
+    Loading : {
+        padding:rateNum(30),
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    LoadingImg:{
+        width:rateNum(20),
+        height:rateNum(20)
     }
 })
 

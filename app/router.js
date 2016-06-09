@@ -11,8 +11,11 @@ import React, {
 } from 'react-native';
 
 import {Home} from './home';
+import {Detail} from './detail';
+import {Splash} from './splash';
 import {CommonCSS, GetColor} from './common.style';
-import {HomeCSS} from './home.style';
+
+
 
 export class App extends Component {
     constructor(props) {
@@ -27,7 +30,7 @@ export class App extends Component {
     render() {
         const _this = this;
         var navigatorProps = {
-            initialRoute: {name:"LocationSet"},
+            initialRoute: {name:"Home"},
             renderScene: (route, navigator) => {
 
                 const routeName = route.name;
@@ -52,6 +55,14 @@ export class App extends Component {
                             <View style={[CommonCSS.StatusBarBg1, {flex:1, paddingTop: $StatusBarHeight}]}>
                                 <StatusBar backgroundColor={GetColor("black")} barStyle="light-content" />
                                 <Home title="HOME" navigator={navigator} />
+                            </View>
+                        );
+                        break;
+                    case 'Detail' :
+                        return (
+                            <View style={[CommonCSS.StatusBarBg1, {flex:1, paddingTop: $StatusBarHeight}]}>
+                                <StatusBar backgroundColor={GetColor("black")} barStyle="light-content" />
+                                <Detail title="상세정보" data={route.data} navigator={navigator} />
                             </View>
                         );
                         break;
