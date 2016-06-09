@@ -164,7 +164,6 @@ export class Home extends Component {
             )
 
         } else {
-            console.log(this.state)
             var _this = this;
             if(this.state.locationSetState) {
                 Animated.sequence([
