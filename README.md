@@ -18,24 +18,24 @@ https://facebook.github.io/react-native/
 
 ## 서비스 Flow
 
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_1.png">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_1.png">
 
 ## 결과화면
 
 ### IOS
 
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_2.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_3.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_4.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_5.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_6.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_7.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_2.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_3.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_4.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_5.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_6.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_7.png" width="300px">
 
 ### Android
 
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_9.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_10.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_11.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_12.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_13.png" width="300px">
-<img src="http://wagunblog.com/wp/wp-content/uploads/2016/08/RealTimeEmergencyDepartmentInfo_8.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_9.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_10.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_11.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_12.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_13.png" width="300px">
+<img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_8.png" width="300px">
