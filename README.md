@@ -16,7 +16,7 @@ https://developers.daum.net/services/apis/local/geo/coord2addr
 - 페이스북의 React Native를 통하여 구현
 https://facebook.github.io/react-native/ 
 
-## 서비스 Flow
+## Flow
 
 <img src="http://wagunblog.com/wp/wp-content/uploads/2016/04/RealTimeEmergencyDepartmentInfo_1.png">
 
