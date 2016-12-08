@@ -1,5 +1,5 @@
-import React, {
-    Component,
+import React, {Component} from 'react';
+import {
     StyleSheet,
     Text,
     View,
@@ -15,17 +15,14 @@ const deviceWidth = Dimensions.get('window').width;
 import {CommonCSS} from './common.style';
 import {DetailCSS} from './detail.style.js';
 
-export class Detail extends Component {
+export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
     }
-    _pop(){
+    navPop(){
         this.props.navigator.pop();
     }
-    _phoneTel (TelNum) {
+    linkTel (TelNum) {
         const telNum = "tel:" + TelNum.replace(/-/gi,"");
         Alert.alert(
             '',
@@ -45,12 +42,11 @@ export class Detail extends Component {
         )
     }
     render() {
-        console.log(this)
         return(
             <View style={[CommonCSS.wrapper, DetailCSS.wrapper]}>
                 <View style={CommonCSS.Header}>
                     <View style={DetailCSS.PopBtnWrap}>
-                        <TouchableHighlight onPress={()=>this._pop()} underlayColor={'transparent'}>
+                        <TouchableHighlight onPress={()=>this.navPop()} underlayColor={'transparent'}>
                             <Text style={DetailCSS.PopBtnText}>이전</Text>
                         </TouchableHighlight>
                     </View>
@@ -63,7 +59,7 @@ export class Detail extends Component {
                     <View style={DetailCSS.HospitalName}>
                         <View style={DetailCSS.innerView}><Text style={DetailCSS.HospitalNameText}>{this.props.data.dutyName}</Text></View>
                         <View style={DetailCSS.innerView}>
-                            <TouchableHighlight onPress={()=>this._phoneTel(this.props.data.dutyTel3)} underlayColor={'transparent'}>
+                            <TouchableHighlight onPress={()=>this.linkTel(this.props.data.dutyTel3)} underlayColor={'transparent'}>
                                 <Text style={DetailCSS.innerViewText}>응급실전화 : <Text style={DetailCSS.telNum}>{this.props.data.dutyTel3}</Text></Text>
                             </TouchableHighlight>
                         </View>

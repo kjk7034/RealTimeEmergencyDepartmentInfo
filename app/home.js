@@ -1,6 +1,6 @@
-import React, {
+import React, {Component} from 'react';
+import {
     AppRegistry,
-    Component,
     StyleSheet,
     Text,
     View,
@@ -18,7 +18,7 @@ import {CommonCSS} from './common.style';
 import {HomeCSS} from './home.style';
 const localAddr = require('./addr.json')
 
-export class Home extends Component {
+export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,10 +40,9 @@ export class Home extends Component {
     getCurrentPos(){
         return new Promise((resolve, reject)=>{
             navigator.geolocation.getCurrentPosition((position)=>{
-                //console.log("getCurrentPos - success")
                 resolve(position.coords)
             }, (error) =>{
-                var defaultPos = {
+                const defaultPos = {
                     longitude : 127.1163593869371,
                     latitude : 37.40209529907863
                 }
@@ -54,7 +53,7 @@ export class Home extends Component {
     }
     getCoord2addr(pos){
         return new Promise((resolve, reject)=>{
-            var fetchUrl = "http://wagunblog.com/School/api_coord2addr.php?longitude="+pos.longitude+'&latitude='+pos.latitude;
+            const fetchUrl = "http://wagunblog.com/School/api_coord2addr.php?longitude="+pos.longitude+'&latitude='+pos.latitude;
             fetch(fetchUrl)
                 .then((response) => response.json())
                 .then((responseText) => {
@@ -64,7 +63,6 @@ export class Home extends Component {
                         pickerState1 : responseText.name1,
                         pickerState2 : responseText.name2
                     })
-                    console.log("getCoord2addr - success");
                     resolve()
                 })
                 .catch((error) => {
@@ -74,15 +72,14 @@ export class Home extends Component {
     }
     setStage(){
         return new Promise((resolve, reject)=>{
-            var _this = this;
-            var STAGE1 = localAddr.findIndex(function(addr){
-                return addr.name == _this.state.stage1
+            let STAGE1 = localAddr.findIndex((addr)=>{
+                return addr.name == this.state.stage1
             })
             if(STAGE1 < 0) {
                 STAGE1 = 0;
             }
-            var STAGE2 = localAddr[STAGE1].items.findIndex(function(addr){
-                return addr.name == _this.state.stage2
+            let STAGE2 = localAddr[STAGE1].items.findIndex((addr)=>{
+                return addr.name == this.state.stage2
             })
             if(STAGE2 < 0) {
                 STAGE2 = 0;
@@ -103,45 +100,42 @@ export class Home extends Component {
                 this.setStage()
             })
             .then(()=>{
-                this._getData(this.state.stage1, this.state.stage2)
+                this.getData(this.state.stage1, this.state.stage2)
             })
             .catch((error)=>{
                 console.log("ERROR  ", error)
             })
     }
-    _setLocation (){
+    setLocation (){
         this.setState({
             locationSetState : !this.state.locationSetState,
             dataLoading : false,
             stage1 : this.state.pickerState1,
             stage2 : this.state.pickerState2,
         })
-        this._getData(this.state.pickerState1, this.state.pickerState2);
+        this.getData(this.state.pickerState1, this.state.pickerState2);
     }
-    _locationDimmed (){
+    locationDimmed (){
         this.setState({
             locationSetState : !this.state.locationSetState
         })
     }
-    _getData(stage1, stage2){
-        var _this = this;
+    getData(stage1, stage2){
         return new Promise((resolve, reject)=>{
-            var fetchUrl = "http://wagunblog.com/School/api_parser.php?STAGE1=" + stage1 + "&STAGE2=" + stage2 + "&numOfRows=999&pageNo=1";
+            const fetchUrl = "http://wagunblog.com/School/api_parser.php?STAGE1=" + stage1 + "&STAGE2=" + stage2 + "&numOfRows=999&pageNo=1";
             fetch(fetchUrl)
                 .then((response) => response.json())
                 .then((responseText) => {
-
                     if(responseText.response.body.items.item.length > 1) {
-                        _this.setState({
-                            //dataArray : responseText.response.body.items.item,
-                            dataSource : _this.state.dataSource.cloneWithRows(responseText.response.body.items.item),
+                        this.setState({
+                            dataSource : this.state.dataSource.cloneWithRows(responseText.response.body.items.item),
                             dataLoading : true
                         })
                     } else {
-                        var dataArray = [];
+                        const dataArray = [];
                         dataArray.push(responseText.response.body.items.item)
-                        _this.setState({
-                            dataSource : _this.state.dataSource.cloneWithRows(dataArray),
+                        this.setState({
+                            dataSource : this.state.dataSource.cloneWithRows(dataArray),
                             dataLoading : true
                         })
                     }
@@ -150,7 +144,7 @@ export class Home extends Component {
                     resolve()
                 })
                 .catch((error) => {
-                    reject("_getData - ERROR")
+                    reject("getData - ERROR")
                 });
         })
     }
@@ -163,90 +157,99 @@ export class Home extends Component {
                 </View>
             )
 
+        }
+        if(this.state.locationSetState) {
+            Animated.sequence([
+                Animated.timing(
+                    this.state.locationSetAni,
+                    {
+                        duration:200,
+                        toValue: {x: deviceWidth, y:0}
+                    }
+                )
+            ]).start();
         } else {
-            var _this = this;
-            if(this.state.locationSetState) {
-                Animated.sequence([
-                    Animated.timing(
-                        this.state.locationSetAni,
-                        {
-                            duration:200,
-                            toValue: {x: deviceWidth, y:0}
-                        }
-                    )
-                ]).start();
-            } else {
-                Animated.sequence([
-                    Animated.timing(
-                        this.state.locationSetAni,
-                        {
-                            duration:150,
-                            toValue: {x: 0, y:0}
-                        }
-                    )
-                ]).start();
-            }
-            return(
-                <View style={[CommonCSS.wrapper, HomeCSS.wrapper]}>
-                    <View style={CommonCSS.Header}>
-                        <View style={HomeCSS.LocationBtnWrap}>
-                            <TouchableHighlight onPress={()=>this._locationDimmed()} underlayColor={'transparent'}>
-                                <Text style={HomeCSS.LocationBtnText}>지역 변경</Text>
+            Animated.sequence([
+                Animated.timing(
+                    this.state.locationSetAni,
+                    {
+                        duration:150,
+                        toValue: {x: 0, y:0}
+                    }
+                )
+            ]).start();
+        }
+        return(
+            <View style={[CommonCSS.wrapper, HomeCSS.wrapper]}>
+                <View style={CommonCSS.Header}>
+                    <View style={HomeCSS.LocationBtnWrap}>
+                        <TouchableHighlight onPress={()=>this.locationDimmed()} underlayColor={'transparent'}>
+                            <Text style={HomeCSS.LocationBtnText}>지역 변경</Text>
+                        </TouchableHighlight>
+                    </View>
+                    <Text style={CommonCSS.h1}>{this.props.title}</Text>
+                </View>
+                <View style={HomeCSS.LocationWrap}>
+                    <Text style={HomeCSS.LocationText}>지역 : {this.state.stage1} / {this.state.stage2}</Text>
+                </View>
+                <ListHospital {...this.props} dataLoading={this.state.dataLoading} dataSource={this.state.dataSource} />
+                <Animated.View style={[HomeCSS.PickerWrap, {left:-deviceWidth,transform: this.state.locationSetAni.getTranslateTransform()}]}>
+                    <View style={HomeCSS.PickerTextWrap}>
+                        <Text style={HomeCSS.PickerText}>지역 설정하기</Text>
+                    </View>
+                    <View style={HomeCSS.PickerWrapInner}>
+                        <Picker
+                            style={HomeCSS.Picker1}
+                            selectedValue={this.state.setStage1}
+                            onValueChange={(setStage1) => {
+                                this.setState({
+                                    setStage1: setStage1, 
+                                    setStage2: 0, 
+                                    pickerState1 : this.state.datas[setStage1].name,
+                                    pickerState2: localAddr[setStage1].items[0].name
+                                })
+                            }}>
+                            {Object.keys(this.state.datas).map((setStage1) => (
+                                <Picker.Item
+                                    key={setStage1}
+                                    value={setStage1}
+                                    label={this.state.datas[setStage1].name}
+                                />
+                            ))}
+                        </Picker>
+                        <Picker
+                            style={HomeCSS.Picker2}
+                            key={this.state.setStage1}
+                            selectedValue={this.state.setStage2}
+                            onValueChange={(stage2) => {
+                                this.setState({
+                                    setStage2: stage2, 
+                                    pickerState2: localAddr[this.state.setStage1].items[stage2].name
+                                })
+                            }}>
+                            {localAddr[this.state.setStage1].items.map((data, index) => (
+                                <Picker.Item key={this.state.setStage1 + "_" + index} value={index} label={data.name} />
+                            ))}
+                        </Picker>
+                        <View style={HomeCSS.BtnConfirmWrap}>
+                            <TouchableHighlight onPress={()=>this.setLocation()} underlayColor={'transparent'}>
+                                <View style={HomeCSS.BtnConfirm}>
+                                    <Text style={HomeCSS.BtnConfirmText}>설정</Text>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight onPress={()=>this.locationDimmed()} underlayColor={'transparent'}>
+                                <View style={HomeCSS.BtnCancel}>
+                                    <Text style={HomeCSS.BtnCancelText}>취소</Text>
+                                </View>
                             </TouchableHighlight>
                         </View>
-                        <Text style={CommonCSS.h1}>{this.props.title}</Text>
                     </View>
-                    <View style={HomeCSS.LocationWrap}>
-                        <Text style={HomeCSS.LocationText}>지역 : {this.state.stage1} / {this.state.stage2}</Text>
+                    <View style={HomeCSS.PickerNextTextWrap}>
+                        <Text style={HomeCSS.PickerNextText}>* 설정 버튼을 누르면 지역이 변경됩니다.</Text>
                     </View>
-                    <ListHospital {...this.props} dataLoading={this.state.dataLoading} dataSource={this.state.dataSource} />
-                    <Animated.View style={[HomeCSS.PickerWrap, {left:-deviceWidth,transform: this.state.locationSetAni.getTranslateTransform()}]}>
-                        <View style={HomeCSS.PickerTextWrap}>
-                            <Text style={HomeCSS.PickerText}>지역 설정하기</Text>
-                        </View>
-                        <View style={HomeCSS.PickerWrapInner}>
-                            <Picker
-                                style={HomeCSS.Picker1}
-                                selectedValue={this.state.setStage1}
-                                onValueChange={(setStage1) => {this.setState({setStage1, setStage2: 0, pickerState1 : this.state.datas[setStage1].name})}}>
-                                {Object.keys(this.state.datas).map((setStage1) => (
-                                    <Picker.Item
-                                        key={setStage1}
-                                        value={setStage1}
-                                        label={this.state.datas[setStage1].name}
-                                    />
-                                ))}
-                            </Picker>
-                            <Picker
-                                style={HomeCSS.Picker2}
-                                key={this.state.setStage1}
-                                selectedValue={this.state.setStage2}
-                                onValueChange={(stage2) => {this.setState({setStage2: stage2, pickerState2: localAddr[this.state.setStage1].items[stage2].name})}}>
-                                {localAddr[this.state.setStage1].items.map((data, index) => (
-                                    <Picker.Item key={this.state.setStage1 + "_" + index} value={index} label={data.name} />
-                                ))}
-                            </Picker>
-                            <View style={HomeCSS.BtnConfirmWrap}>
-                                <TouchableHighlight onPress={()=>_this._setLocation()} underlayColor={'transparent'}>
-                                    <View style={HomeCSS.BtnConfirm}>
-                                        <Text style={HomeCSS.BtnConfirmText}>설정</Text>
-                                    </View>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=>_this._locationDimmed()} underlayColor={'transparent'}>
-                                    <View style={HomeCSS.BtnCancel}>
-                                        <Text style={HomeCSS.BtnCancelText}>취소</Text>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                        </View>
-                        <View style={HomeCSS.PickerNextTextWrap}>
-                            <Text style={HomeCSS.PickerNextText}>* 설정 버튼을 누르면 지역이 변경됩니다.</Text>
-                        </View>
-                    </Animated.View>
-
-                </View>
-            )
-        }
+                </Animated.View>
+            </View>
+        )
     }
 }
 
@@ -257,15 +260,15 @@ class ListHospital extends Component {
             dataLoading : this.props.dataLoading,
         }
     }
-    _goView(data){
+    navPush(data){
         this.props.navigator.push({
             name : "Detail",
             title : data.dutyName,
             data : data
         })
     }
-    _renderRow (data, sectionId, rowID){
-        var viewData = {
+    renderRow (data, sectionId, rowID){
+        const viewData = {
             'dutyName' : data.dutyName,
             'dutyTel3' : data.dutyTel3,
             'hvec' : data.hvec || 0,
@@ -283,10 +286,9 @@ class ListHospital extends Component {
             'hv10' : data.hv10 || "N",
             'hv11' : data.hv11 || "N"
         }
-        var _this = this;
         return(
             <View style={HomeCSS.ListItem}>
-                <TouchableHighlight onPress={()=>_this._goView(viewData)} underlayColor={'transparent'}>
+                <TouchableHighlight onPress={()=>this.navPush(viewData)} underlayColor={'transparent'}>
                     <View style={HomeCSS.ListItemBtn}><Text style={HomeCSS.ListItemBtnText}>{data.dutyName}</Text></View>
                 </TouchableHighlight>
             </View>
@@ -306,7 +308,7 @@ class ListHospital extends Component {
             <ListView
                 dataSource={this.props.dataSource}
                 contentContainerStyle={HomeCSS.Lists}
-                renderRow={this._renderRow.bind(this)}
+                renderRow={this.renderRow.bind(this)}
             />
         )
     }

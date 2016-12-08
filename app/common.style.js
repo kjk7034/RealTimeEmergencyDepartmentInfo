@@ -1,5 +1,4 @@
-'use strict';
-import React, {
+import {
     StyleSheet,
     Dimensions
 } from 'react-native';
@@ -31,40 +30,34 @@ export const GetColor = function (type) {
     switch (type) {
         case "dark" :
             return "#2e2e2e";
-            break;
         case "gray" :
-            return "#757575";
-            break;
+            return "#828282";
         case "bg" :
             return "#e9e9e9";
-            break;
         case "white" :
             return "#fff";
-            break;
-        case "black" :
-            return "#000";
-            break;
         case "color1" :
-            return "#708eaa";
-            break;
+            return "#3b5999";
         case "color2" :
-            return "#c6d2dd";
-            break;
+            return "#4267b2";
         case "color3" :
-            return "#f26f5b";
-            break;
+            return "#c6c7cc";
         case "color4" :
-            return "#fac5bd";
-            break;
+            return "#e9ebee";
+        case "color5" :
+            return "#1d2129";
+        case "color6" :
+            return "#141b23";
+        case "black" :
         default :
-            break;
+            return "#000";
     }
 };
 
 export const CommonCSS = StyleSheet.create({
     wrapper : {
         flex:1,
-        backgroundColor:"#dddee3"
+        backgroundColor: GetColor("white")
     },
     contCenter : {
         alignItems : "center",
@@ -78,12 +71,12 @@ export const CommonCSS = StyleSheet.create({
     },
     Header : {
         height:rateNum(56),
-        backgroundColor: "#3b5999",
+        backgroundColor: GetColor("color1"),
         alignItems : 'center',
         justifyContent : 'center',
     },
     h1 : {
-        color:"#fff",
+        color: GetColor("white"),
         fontSize: rateNum(20),
     },
     Loading : {

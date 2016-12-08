@@ -1,11 +1,10 @@
-'use strict';
-import React, {
+import {
     StyleSheet,
     Dimensions
 } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
-import {rateNum} from './common.style';
+import {rateNum, GetColor} from './common.style';
 
 
 export const DetailCSS = StyleSheet.create({
@@ -14,35 +13,35 @@ export const DetailCSS = StyleSheet.create({
         left:rateNum(11),
         top:rateNum(11),
         height:rateNum(34),
-        alignItems : "center",
+        alignItems: "center",
         justifyContent: "center",
         borderRadius:5,
         borderWidth: 1,
-        backgroundColor:"#fff",
-        borderColor:"#fff",
+        backgroundColor:GetColor("white"),
+        borderColor:GetColor("white"),
         paddingHorizontal:rateNum(8)
     },
-    PopBtnText : {
+    PopBtnText: {
         fontSize: rateNum(16),
-        color:"#4267b2"
+        color: GetColor("color2")
     },
-    DetailList : {
+    DetailList: {
         marginTop:rateNum(15)
     },
-    DetailEtcList : {
+    DetailEtcList: {
         borderWidth: 1,
         justifyContent:"center",
         marginHorizontal: rateNum(15),
-        backgroundColor: "#fff",
+        backgroundColor: GetColor("white"),
         marginBottom:rateNum(15),
         borderRadius:5,
         padding:rateNum(10)
     },
-    DetailItem : {
+    DetailItem: {
         marginVertical:rateNum(2)
     },
-    telNum : {
-        fontWeight : "bold"
+    telNum: {
+        fontWeight: "bold"
     },
     HospitalNameText: {
         fontSize: rateNum(16),
@@ -51,42 +50,42 @@ export const DetailCSS = StyleSheet.create({
     HospitalName:{
         borderWidth: 1,
         marginHorizontal: rateNum(15),
-        backgroundColor: "#fff",
+        backgroundColor: GetColor("white"),
         marginBottom:rateNum(15),
         borderRadius:5,
         padding:rateNum(10)
     },
-    innerViewText : {
+    innerViewText: {
         fontSize:rateNum(14)
     },
-    innerView : {
+    innerView: {
         marginVertical:rateNum(2)
     },
-    infoInner : {
+    infoInner: {
         marginTop:rateNum(5)
     },
-    infoText : {
-        color: "#4267b2"
+    infoText: {
+        color: GetColor("color2")
     },
-    infoText2 : {
+    infoText2: {
         fontWeight:"bold"
     },
-    info : {
+    info: {
         marginHorizontal: rateNum(15),
-        marginBottom : rateNum(15),
+        marginBottom: rateNum(15),
         borderWidth: 1,
-        borderColor:"#fff",
-        backgroundColor: "#fff",
+        borderColor:GetColor("white"),
+        backgroundColor: GetColor("white"),
         borderRadius:5,
         padding:rateNum(10)
     },
-    Heading2Text : {
+    Heading2Text: {
         fontWeight:"bold",
-        fontSize : rateNum(20)
+        fontSize: rateNum(20)
     },
-    Heading2 : {
+    Heading2: {
         marginHorizontal: rateNum(15),
-        marginBottom : rateNum(10)
+        marginBottom: rateNum(10)
     }
 })
 
